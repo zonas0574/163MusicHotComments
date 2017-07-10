@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: net.dongliu:requests:4.9.3">
+    <CLASSES>
+      <root url="jar://D:/work/apache-maven-3.5.0/repository/net/dongliu/requests/4.9.3/requests-4.9.3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://D:/work/apache-maven-3.5.0/repository/net/dongliu/requests/4.9.3/requests-4.9.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://D:/work/apache-maven-3.5.0/repository/net/dongliu/requests/4.9.3/requests-4.9.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
