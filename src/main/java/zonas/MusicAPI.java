@@ -1,6 +1,9 @@
+package zonas;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import net.dongliu.requests.Requests;
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -14,15 +17,19 @@ import java.util.List;
 import java.util.Map;
 
 public class MusicAPI {
+    private MusicAPI() {
+    }
+
+    private static Logger log = Logger.getLogger(MusicAPI.class);
 
     private static String getParams(String param) {
-        byte[] forth_param = {'0', 'C', 'o', 'J', 'U', 'm', '6', 'Q', 'y', 'w', '8', 'W', '8', 'j', 'u', 'd'};
+        byte[] forthParam = {'0', 'C', 'o', 'J', 'U', 'm', '6', 'Q', 'y', 'w', '8', 'W', '8', 'j', 'u', 'd'};
         byte[] iv = {'0', '1', '0', '2', '0', '3', '0', '4', '0', '5', '0', '6', '0', '7', '0', '8'};
         byte[] secondKey = {'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F', 'F'};
-        String h_encText;
-        h_encText = Util.AES_encrypt(param, forth_param, iv);
-        h_encText = Util.AES_encrypt(h_encText, secondKey, iv);
-        return h_encText;
+        String encText;
+        encText = Util.aesEncrypt(param, forthParam, iv);
+        encText = Util.aesEncrypt(encText, secondKey, iv);
+        return encText;
     }
 
     private static String getJson(String params, String url) {
@@ -69,9 +76,9 @@ public class MusicAPI {
             list.add(com);
         }
         if (!list.isEmpty()) {
-            System.out.println("----> 获取" + songId + "的热门评论成功!");
+            log.info("----> 获取" + songId + "的热门评论成功!");
         } else {
-            System.out.println("----> 获取" + songId + "的热门评论失败!");
+            log.info("----> 获取" + songId + "的热门评论失败!");
         }
         return list;
     }
@@ -96,7 +103,7 @@ public class MusicAPI {
         String url = "http://music.163.com/weapi/search/suggest/web?csrf_token=";
         String param = "{s:'" + name + "', csrf_token:''}";
         String singId = getSinger(getJson(getParams(param), url));
-        System.out.println(name + " ----> " + singId);
+        log.info(name + " ----> " + singId);
         return singId;
     }
 
@@ -110,9 +117,9 @@ public class MusicAPI {
                 albumList.add(link.attr("href").substring(10));
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.debug(e);
         }
-        System.out.println("Album Id: " + albumList);
+        log.info("Album Id: " + albumList);
         return albumList;
     }
 
@@ -128,9 +135,9 @@ public class MusicAPI {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.debug(e);
         }
-        System.out.println("Song Id : " + songList);
+        log.info("Song Id : " + songList);
         return songList;
     }
 }

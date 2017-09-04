@@ -1,24 +1,29 @@
+package zonas;
+
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 public class Dao {
+    private Dao() {
+    }
 
+    private static Logger log = Logger.getLogger(Dao.class);
     private static Connection conn;
     private static PreparedStatement ps;
 
     private static void getConnection() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Map<String, String> map = Util.getJdbcProperty();
-            conn = DriverManager.getConnection(map.get("url"), map.get("username"), map.get("password"));
+            conn = DriverManager.getConnection("jdbc:sqlite:Music163Comments.db");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            log.debug(e);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.debug(e);
         }
     }
 
@@ -28,9 +33,9 @@ public class Dao {
             Comments comments = list.get(i);
             result = addComment(comments);
             if (result == 1) {
-                System.out.println("<---- 储存" + comments.getSongId() + "第" + ((i + 1) < 10 ? "0" + (i + 1) : (i + 1)) + "条数据成功！");
+                log.info("<---- 储存" + comments.getSongId() + "第" + ((i + 1) < 10 ? "0" + (i + 1) : (i + 1)) + "条数据成功！");
             } else {
-                System.out.println("<---- 储存" + comments.getSongId() + "第" + ((i + 1) < 10 ? "0" + (i + 1) : (i + 1)) + "条数据失败！");
+                log.info("<---- 储存" + comments.getSongId() + "第" + ((i + 1) < 10 ? "0" + (i + 1) : (i + 1)) + "条数据失败！");
             }
         }
     }
@@ -40,16 +45,14 @@ public class Dao {
         int result = 0;
         try {
             String sql = "INSERT INTO hotComments(songId,userId,content,likedCount,times) VALUES(?,?,?,?,?)";
-            String[] strings = {comments.getSongId(), comments.getUserId(), Util.EmojiFilter(comments.getContent()), comments.getLikedCount(), comments.getTime()};
+            String[] strings = {comments.getSongId(), comments.getUserId(), comments.getContent(), comments.getLikedCount(), comments.getTime()};
             ps = conn.prepareStatement(sql);
-            if (strings != null) {
-                for (int i = 0; i < strings.length; i++) {
-                    ps.setString(i + 1, strings[i]);
-                }
+            for (int i = 0; i < strings.length; i++) {
+                ps.setString(i + 1, strings[i]);
             }
             result = ps.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
+            log.debug(e);
         } finally {
             close();
         }
@@ -65,7 +68,7 @@ public class Dao {
                 conn.close();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.debug(e);
         }
     }
 }

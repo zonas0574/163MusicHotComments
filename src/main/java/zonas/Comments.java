@@ -1,3 +1,5 @@
+package zonas;
+
 public class Comments {
     private int id;
     private String songId;
@@ -56,7 +58,7 @@ public class Comments {
 
     @Override
     public String toString() {
-        return "Comments{" +
+        return "zonas.Comments{" +
                 "id=" + id +
                 ", userId=" + userId +
                 ", content='" + content + '\'' +
