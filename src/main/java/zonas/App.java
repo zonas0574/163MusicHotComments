@@ -8,7 +8,8 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class App {
-    private static int maxThread = 4;
+    private static final int maxThread = 4;
+    private static final String singerName = "周杰伦";
     private static ConcurrentLinkedQueue<String> albumLQueue = new ConcurrentLinkedQueue<String>();
     private static ConcurrentLinkedQueue<String> songList = new ConcurrentLinkedQueue<String>();
     private static AtomicInteger threadNumber = new AtomicInteger(1);
@@ -19,7 +20,7 @@ public class App {
     });
 
     public static void main(String[] args) {
-        String singerId = MusicAPI.singer("周杰伦");
+        String singerId = MusicAPI.singer(singerName);
         List<String> albumList = MusicAPI.album(singerId);
         albumLQueue.addAll(albumList);
         for (int i = 0; i < maxThread; i++) {
