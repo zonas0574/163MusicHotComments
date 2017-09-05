@@ -44,8 +44,8 @@ public class Dao {
         getConnection();
         int result = 0;
         try {
-            String sql = "INSERT INTO hotComments(songId,userId,content,likedCount,times) VALUES(?,?,?,?,?)";
-            String[] strings = {comments.getSongId(), comments.getUserId(), comments.getContent(), comments.getLikedCount(), comments.getTime()};
+            String sql = "INSERT INTO hotComments(singerId,songId,userId,content,likedCount,times) VALUES(?,?,?,?,?,?)";
+            String[] strings = {comments.getSingerId(), comments.getSongId(), comments.getUserId(), comments.getContent(), comments.getLikedCount(), comments.getTime()};
             ps = conn.prepareStatement(sql);
             for (int i = 0; i < strings.length; i++) {
                 ps.setString(i + 1, strings[i]);

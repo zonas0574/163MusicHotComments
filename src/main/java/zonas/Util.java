@@ -1,5 +1,7 @@
 package zonas;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.log4j.Logger;
 
@@ -8,6 +10,7 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
+import java.util.Map;
 
 public class Util {
     private Util() {
@@ -29,5 +32,11 @@ public class Util {
             log.debug(e);
         }
         return encryptText;
+    }
+
+    public static Map<String, Object> getMapByJson(String json) {
+        Gson g = new Gson();
+        return g.fromJson(json, new TypeToken<Map<String, Object>>() {
+        }.getType());
     }
 }

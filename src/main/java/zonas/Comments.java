@@ -2,6 +2,7 @@ package zonas;
 
 public class Comments {
     private int id;
+    private String singerId;
     private String songId;
     private String userId;
     private String content;
@@ -14,6 +15,14 @@ public class Comments {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getSingerId() {
+        return singerId;
+    }
+
+    public void setSingerId(String singerId) {
+        this.singerId = singerId;
     }
 
     public String getSongId() {
