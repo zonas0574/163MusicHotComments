@@ -64,15 +64,4 @@ public class Comments {
     public void setTime(String time) {
         this.time = time;
     }
-
-    @Override
-    public String toString() {
-        return "zonas.Comments{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", content='" + content + '\'' +
-                ", likedCount=" + likedCount +
-                ", time=" + time +
-                '}';
-    }
 }

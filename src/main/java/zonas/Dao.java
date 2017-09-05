@@ -40,7 +40,7 @@ public class Dao {
         }
     }
 
-    public static int addComment(Comments comments) {
+    private static int addComment(Comments comments) {
         getConnection();
         int result = 0;
         try {
