@@ -12,13 +12,11 @@
 歌手名>歌手Id>专辑Id>歌Id>热门评论
 
 ### 使用
-1. 使用前修改App.java的参数
+1. 下载[Music163HotComments-1.0.jar](https://github.com/zonas0574/163MusicHotComments/releases/tag/1.0)
+2. 运行`java -jar Music163HotComments-1.0.jar`
+3. 按命令行中提醒依次输入以下参数
+  - `singerName` 歌手名（回车默认周杰伦）
   - `maxThread` 专辑获取歌的多线程中最大线程数
-  - `singerName` 歌手名
-``` java
-private static final int maxThread = 4;
-private static final String singerName = "周杰伦";
-```
-2. 运行
+
 ### 借鉴
 163music API：[知乎回答](https://www.zhihu.com/question/36081767/answer/140287795)
