@@ -5,7 +5,7 @@
 - [jsoup](https://jsoup.org/) 解析页面元素
 - [requests](https://github.com/clearthesky/requests) 获取API数据
 - [Commons Codec](https://commons.apache.org/proper/commons-codec/) 处理api请求参数
-- [gosn](https://github.com/google/gson) 解析API数据
+- [gson](https://github.com/google/gson) 解析API数据
 - [log4j](https://logging.apache.org/log4j/2.x/) 输出信息
 
 ### 程序流程
